@@ -1,0 +1,118 @@
+---
+swagger: "2.0"
+info:
+  description: More description about the API
+  version: 1.0.0
+  title: Swagger API Doc
+host: virtserver.swaggerhub.com
+basePath: /Betzy-Salas3/Users/1.0.0
+tags:
+- name: user-controller
+  description: User Controller
+schemes:
+- https
+paths:
+  /user:
+    post:
+      tags:
+      - user-controller
+      summary: createUser
+      operationId: createUserUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: user
+        description: user
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /user/userId/{idUser}:
+    get:
+      tags:
+      - user-controller
+      summary: checkUserById
+      operationId: checkUserByIdUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: idUser
+        in: path
+        description: idUser
+        required: true
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Optional«User»'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /user/{username}:
+    get:
+      tags:
+      - user-controller
+      summary: checkUser
+      operationId: checkUserUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: username
+        in: path
+        description: username
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Optional«User»'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+definitions:
+  Optional«User»:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      present:
+        type: boolean
+    title: Optional«User»
+  User:
+    type: object
+    properties:
+      idUser:
+        type: integer
+        format: int32
+      password:
+        type: string
+      username:
+        type: string
+    title: User
