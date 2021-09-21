@@ -19,7 +19,7 @@ public class ErrorHandler {
 	
 	@ExceptionHandler({MethodArgumentNotValidException.class})
 	public ResponseEntity<ErrorInfo> methodArgumentNotValidException( MethodArgumentNotValidException exception){
-		ErrorInfo errorInfo = new ErrorInfo(HttpStatus.BAD_REQUEST.value(), "Bad Request The request is invalid.");
+		ErrorInfo errorInfo = new ErrorInfo(HttpStatus.BAD_REQUEST.value(), "Bad Request The request is invalid..");
 		return new ResponseEntity<>(errorInfo, HttpStatus.BAD_REQUEST);	
 	}
 	

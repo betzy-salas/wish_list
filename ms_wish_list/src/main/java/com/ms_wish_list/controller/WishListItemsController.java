@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,13 +22,14 @@ import com.ms_wish_list.exception.UserNotFound;
 import com.ms_wish_list.exception.WishListItemNotFound;
 import com.ms_wish_list.interfaces.IWishListItemsService;
 
+@RequestMapping("/wishlistItems")
 @RestController
 public class WishListItemsController {
 
 	@Autowired
 	private IWishListItemsService _wishListItemsService;
 	
-	@PostMapping("/wishlistItems")
+	@PostMapping
 	public @ResponseBody ResponseEntity<WishListItems> createWishListItems(@Valid @RequestBody WishListItems wishListItems) throws UserNotFound {
 		
 		WishListItems wishListItemesSaved = _wishListItemsService.save(wishListItems);
@@ -38,7 +40,7 @@ public class WishListItemsController {
 		
 	}
 	
-	@GetMapping("/wishlistItems/{idWishListItems}")
+	@GetMapping("/{idWishListItems}")
 	public @ResponseBody ResponseEntity<Optional<WishListItems>> checkWishList(@Valid @PathVariable int idWishListItems) throws WishListItemNotFound{
 		Optional<WishListItems> wishListItemsFound = _wishListItemsService.findById(idWishListItems);
 		if(!wishListItemsFound.isEmpty())
@@ -56,7 +58,7 @@ public class WishListItemsController {
 			throw new WishListItemNotFound("");
 	}
 	
-    @DeleteMapping(value = "/wishlistItems/wishListItem/{idWishListItems}")
+    @DeleteMapping(value = "/wishListItem/{idWishListItems}")
     public ResponseEntity<Boolean> deleteWishList(@PathVariable int idWishListItems) throws WishListItemNotFound {
     	if(_wishListItemsService.deleteWishItemsId(idWishListItems))
     		return ResponseEntity.status(HttpStatus.OK).body(true);
@@ -64,7 +66,7 @@ public class WishListItemsController {
 			throw new WishListItemNotFound("");
     }
     
-	@GetMapping("/wishlistsItems/idWishListAll/{idWishList}")
+	@GetMapping("/idWishListAll/{idWishList}")
 	public @ResponseBody ResponseEntity<List<WishListItems>> checkWishItemsAll(@PathVariable Integer idWishList) throws WishListItemNotFound{
 		List<WishListItems> wishListItemsFound = _wishListItemsService.findByIdWishList(idWishList);
 		if(!wishListItemsFound.isEmpty())
@@ -73,7 +75,7 @@ public class WishListItemsController {
 			throw new WishListItemNotFound("");
 	}
 	
-    @DeleteMapping(value = "/wishlistItems/idWishList/{idWishList}")
+    @DeleteMapping(value = "/idWishList/{idWishList}")
     public ResponseEntity<Boolean> deleteWishListItemsAll(@PathVariable Integer idWishList) throws WishListItemNotFound {
     	if(_wishListItemsService.deleteWishItemsAll(idWishList))
     		return ResponseEntity.status(HttpStatus.OK).body(true);

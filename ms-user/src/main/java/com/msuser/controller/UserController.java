@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.msuser.domain.User;
+import com.msuser.exceptions.UserNotFound;
 import com.msuser.interfaces.IUserService;
 
 @RestController
@@ -31,23 +32,22 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/{username}")
-	public @ResponseBody ResponseEntity<Optional<User>> checkUser(@Valid @PathVariable String username) throws Exception {
+	public @ResponseBody ResponseEntity<Optional<User>> checkUser(@Valid @PathVariable String username) throws UserNotFound {
 		Optional<User> userFound = _userService.findByUsername(username);
 		if(!userFound.isEmpty())
 			return ResponseEntity.status(HttpStatus.OK).body(userFound);
 		else {	
-			throw new Exception();
+			throw new UserNotFound("");
 		}
 	}
 	
 	@GetMapping("/userId/{idUser}")
-	public @ResponseBody ResponseEntity<Optional<User>> checkUserById(@Valid @PathVariable int idUser) throws Exception {
+	public @ResponseBody ResponseEntity<Optional<User>> checkUserById(@Valid @PathVariable int idUser) throws UserNotFound {
 		Optional<User> userFound = _userService.findByIdUser(idUser);
 		if(!userFound.isEmpty())
 			return ResponseEntity.status(HttpStatus.OK).body(userFound);
 		else {	
-			throw new Exception();
+			throw new UserNotFound("");
 		}
 	}
-
 }

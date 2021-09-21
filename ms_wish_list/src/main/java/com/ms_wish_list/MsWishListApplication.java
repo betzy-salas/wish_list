@@ -13,5 +13,7 @@ public class MsWishListApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MsWishListApplication.class, args);
 	}
+	
+	
 
 }

@@ -1,0 +1,44 @@
+version: '1.0'
+services:
+  eureka-server:
+    image: eureka-service-imgv1 #nombre de la imagen que hemos creado
+    restart: always
+    container_name: eureka-service
+    ports:
+      - '8761:8761'
+    networks:
+      - 'dockernetflix-network'
+  gateway-service:
+    image: gateway-service-imgv1 #nombre de la imagen que hemos creado
+    restart: always
+    container_name: gateway-service
+    ports:
+      - '8080:8080'
+    networks:
+      - 'dockernetflix-network'
+  books-service:
+    image: books-service-imgv1 #nombre de la imagen que hemos creado
+    restart: always
+    container_name: books-service
+    networks:
+      - 'dockernetflix-network'
+  user-service:
+    image: user-service-imgv1 #nombre de la imagen que hemos creado
+    restart: always
+    container_name: user-service
+    networks:
+      - 'dockernetflix-network'
+  security-service:
+    image: security-service-imgv1 #nombre de la imagen que hemos creado
+    restart: always
+    container_name: security-service
+    networks:
+      - 'dockernetflix-network'
+  wish-service:
+    image: wish-service-imgv1 #nombre de la imagen que hemos creado
+    restart: always
+    container_name: wish-service
+    networks:
+      - 'dockernetflix-network'
+networks:
+  dockernetflix-network: networkapi

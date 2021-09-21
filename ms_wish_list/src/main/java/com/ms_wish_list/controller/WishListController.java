@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,13 +22,14 @@ import com.ms_wish_list.exception.UserNotFound;
 import com.ms_wish_list.exception.WishNotFound;
 import com.ms_wish_list.interfaces.IWishListService;
 
+@RequestMapping("/wishlist")
 @RestController
 public class WishListController {
 
 	@Autowired
 	private IWishListService _wishListService;
 	
-	@PostMapping("/wishlist")
+	@PostMapping
 	public @ResponseBody ResponseEntity<WishList> createWishList(@Valid @RequestBody WishList wishList) throws UserNotFound {
 		
 		WishList wishSaved = _wishListService.save(wishList);
@@ -38,7 +40,7 @@ public class WishListController {
 		
 	}
 	
-	@GetMapping("/wishlist/{idWishList}")
+	@GetMapping("/{idWishList}")
 	public @ResponseBody ResponseEntity<Optional<WishList>> checkWishList(@Valid @PathVariable int idWishList) throws WishNotFound{
 		Optional<WishList> wishListFound = _wishListService.findById(idWishList);
 		if(!wishListFound.isEmpty())
@@ -56,7 +58,7 @@ public class WishListController {
 			throw new WishNotFound("");
 	}
 	
-    @DeleteMapping(value = "/wishlist/{idWishList}")
+    @DeleteMapping(value = "/{idWishList}")
     public ResponseEntity<Boolean> deleteWishList(@PathVariable int idWishList) throws WishNotFound {
     	if(_wishListService.deleteWishId(idWishList))
     		return ResponseEntity.status(HttpStatus.OK).body(true);

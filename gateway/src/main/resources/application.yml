@@ -1,0 +1,31 @@
+server:
+    port: 8080
+
+spring:
+  application:
+    name: gateway-service
+
+  cloud:
+    gateway:
+      routes:
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path=/user/**
+      - id: books-service
+        uri: lb://books-service
+        predicates:
+        - Path=/books/**
+      - id: wish-service
+        uri: lb://wish-service
+        predicates:
+        - Path=/**
+      - id: security-service
+        uri: lb://security-service
+        predicates:
+        - Path=/**        
+#Eureka Configuration Properties
+eureka: 
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka
