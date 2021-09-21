@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mssecurity.model.User;
 
-@FeignClient(name="ms-user")
+@FeignClient(name="user-service")
 
 @RequestMapping("/user")
 public interface IUserClient {

@@ -8,11 +8,11 @@ echo BUILD AND PUSH Docker
 docker stop gateway-service
 docker rm gateway-service
 echo ------------------------------------------------------------------------------------------
-docker build -t betzysalasvergara/gateway-service-imgv4 .
-docker push betzysalasvergara/gateway-service-imgv7
+docker build -t betzysalasvergara/gateway-service-imgv1 .
+docker push betzysalasvergara/gateway-service-imgv1
 echo ------------------------------------------------------------------------------------------
 echo Run Image
-docker run -p 8080:8080 --name gateway-service --network networkapi -d betzysalasvergara/gateway-service-imgv4
+docker run -p 8080:8080 --name gateway-service --network networkapi -d betzysalasvergara/gateway-service-imgv1
 echo ------------------------------------------------------------------------------------------
 echo End Process
 echo ------------------------------------------------------------------------------------------  
