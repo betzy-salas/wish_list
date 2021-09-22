@@ -1,0 +1,336 @@
+---
+swagger: "2.0"
+info:
+  description: More description about the API
+  version: 1.0.0
+  title: Swagger API Doc
+host: virtserver.swaggerhub.com
+basePath: /Betzy-Salas3/Users/1.0.0
+tags:
+- name: wish-list-controller
+  description: Wish List Controller
+- name: wish-list-items-controller
+  description: Wish List Items Controller
+schemes:
+- https
+paths:
+  /wishlist:
+    post:
+      tags:
+      - wish-list-controller
+      summary: createWishList
+      operationId: createWishListUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: wishList
+        description: wishList
+        required: true
+        schema:
+          $ref: '#/definitions/WishList'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/WishList'
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /wishlist/{idWishList}:
+    get:
+      tags:
+      - wish-list-controller
+      summary: checkWishList
+      operationId: checkWishListUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: idWishList
+        in: path
+        description: idWishList
+        required: true
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Optional«WishList»'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+      - wish-list-controller
+      summary: deleteWishList
+      operationId: deleteWishListUsingDELETE
+      produces:
+      - '*/*'
+      parameters:
+      - name: idWishList
+        in: path
+        description: idWishList
+        required: true
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  /wishlistItems:
+    post:
+      tags:
+      - wish-list-items-controller
+      summary: createWishListItems
+      operationId: createWishListItemsUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: wishListItems
+        description: wishListItems
+        required: true
+        schema:
+          $ref: '#/definitions/WishListItems'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/WishListItems'
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /wishlistItems/idWishList/{idWishList}:
+    delete:
+      tags:
+      - wish-list-items-controller
+      summary: deleteWishListItemsAll
+      operationId: deleteWishListItemsAllUsingDELETE
+      produces:
+      - '*/*'
+      parameters:
+      - name: idWishList
+        in: path
+        description: idWishList
+        required: true
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  /wishlistItems/wishListItem/{idWishListItems}:
+    delete:
+      tags:
+      - wish-list-items-controller
+      summary: deleteWishList
+      operationId: deleteWishListUsingDELETE_1
+      produces:
+      - '*/*'
+      parameters:
+      - name: idWishListItems
+        in: path
+        description: idWishListItems
+        required: true
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      deprecated: false
+  /wishlistItems/{idWishListItems}:
+    get:
+      tags:
+      - wish-list-items-controller
+      summary: checkWishList
+      operationId: checkWishListUsingGET_1
+      produces:
+      - '*/*'
+      parameters:
+      - name: idWishListItems
+        in: path
+        description: idWishListItems
+        required: true
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Optional«WishListItems»'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /wishlists:
+    get:
+      tags:
+      - wish-list-controller
+      summary: checkWishListAll
+      operationId: checkWishListAllUsingGET
+      produces:
+      - '*/*'
+      parameters: []
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WishList'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /wishlistsItems:
+    get:
+      tags:
+      - wish-list-items-controller
+      summary: checkWishListItemsAll
+      operationId: checkWishListItemsAllUsingGET
+      produces:
+      - '*/*'
+      parameters: []
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WishListItems'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /wishlistsItems/idWishListAll/{idWishList}:
+    get:
+      tags:
+      - wish-list-items-controller
+      summary: checkWishItemsAll
+      operationId: checkWishItemsAllUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: idWishList
+        in: path
+        description: idWishList
+        required: true
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WishListItems'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+definitions:
+  Optional«WishListItems»:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      present:
+        type: boolean
+    title: Optional«WishListItems»
+  Optional«WishList»:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      present:
+        type: boolean
+    title: Optional«WishList»
+  WishList:
+    type: object
+    properties:
+      idUser:
+        type: integer
+        format: int32
+      idWishList:
+        type: integer
+        format: int32
+      wishListName:
+        type: string
+    title: WishList
+  WishListItems:
+    type: object
+    properties:
+      bookAuthor:
+        type: string
+      bookId:
+        type: string
+      bookPublisher:
+        type: string
+      bookTitle:
+        type: string
+      idItem:
+        type: integer
+        format: int32
+      idWishList:
+        type: integer
+        format: int32
+      wishList:
+        $ref: '#/definitions/WishList'
+    title: WishListItems
