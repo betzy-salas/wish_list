@@ -107,6 +107,60 @@
 			"name": "Books",
 			"item": [
 				{
+					"name": "GetBooksWithCredentials",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbm5pZSIsImV4cCI6MTYzMjM0NDA0Mn0.D0AMD9Ie5E0BJyEQmcRkgwhgHCcdykOnyKG14OtN88YCFRYY-rx-wWCkV_vnWtMuBROvuPxDorEPNeYudu1lpw",
+								"type": "text"
+							},
+							{
+								"key": "Username",
+								"value": "annie",
+								"type": "text"
+							},
+							{
+								"key": "Password",
+								"value": "12345",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8091/books/volumen?title=&title=potter&author=rowling&publisher=salamandra",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8091",
+							"path": [
+								"books",
+								"volumen"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": ""
+								},
+								{
+									"key": "title",
+									"value": "potter"
+								},
+								{
+									"key": "author",
+									"value": "rowling"
+								},
+								{
+									"key": "publisher",
+									"value": "salamandra"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GetBooks",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -622,15 +676,12 @@
 				},
 				{
 					"name": "validatelogin",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZXNzaSIsImV4cCI6MTYzMjI0NDYyNn0.vil8WlDlSlqN9Cm_7jum0zo-_iXkPtOH5lJVdhkul7ofkEhHxLC7wiSl9xmbRKfitkrNJH1DRn8WM6QW_rtKcA\",\r\n    \"user\": {\r\n        \"username\": \"messi\",\r\n        \"password\": \"12345\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWtsYXVzIiwiZXhwIjoxNjMyMzc2NDg4fQ.yzYSektf1j92mZRt64Ie07pJZI1CbUn6PCRCczOhYZYy-2kX2Mlj_dqP_I8c5nACWscLxhUGgjOBkhW5ha4BFg\",\r\n    \"user\": {\r\n        \"username\": \"niklaus\",\r\n        \"password\": \"12345\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -638,12 +689,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8084/authentication/validate",
+							"raw": "http://localhost:8080/authentication/validate",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8084",
+							"port": "8080",
 							"path": [
 								"authentication",
 								"validate"
@@ -653,7 +704,7 @@
 					"response": []
 				},
 				{
-					"name": "validateToken",
+					"name": "validateTokenInvalid",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},

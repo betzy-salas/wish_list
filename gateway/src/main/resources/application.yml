@@ -16,14 +16,14 @@ spring:
         uri: lb://books-service
         predicates:
         - Path=/books/**
-      - id: wish-service
-        uri: lb://wish-service
-        predicates:
-        - Path=/**
       - id: security-service
         uri: lb://security-service
         predicates:
-        - Path=/authentication/**        
+        - Path=/authentication/** 
+      - id: wish-service
+        uri: lb://wish-service
+        predicates:
+        - Path=/**       
 #Eureka Configuration Properties
 eureka: 
   client:
