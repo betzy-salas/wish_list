@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mssecurity.domain.Token;
 import com.mssecurity.domain.User;
 import com.mssecurity.exceptions.UserNotFound;
+import com.mssecurity.exceptions.ExpiredJwtException;
 import com.mssecurity.service.SecurityService;
 
-@RequestMapping("/authentication")
 @RestController
+@RequestMapping("/authentication")
 public class SecurityController {
  
     @Autowired
@@ -31,8 +32,14 @@ public class SecurityController {
 			throw new UserNotFound("");
     }
     
-    @GetMapping("/validate")
-    public ResponseEntity<Boolean> validateToken(@RequestBody Token token) {
-    	return ResponseEntity.status(HttpStatus.OK).body(securityService.validateToken(token.getToken(), token.getUser()));
+    @PostMapping("/validate")
+    public ResponseEntity<Boolean> validateToken(@RequestBody Token token) throws ExpiredJwtException{
+    	
+    	Boolean validateJwt = securityService.validateToken(token.getToken(), token.getUser());
+    	
+    	if (validateJwt)
+    		return ResponseEntity.status(HttpStatus.OK).body(securityService.validateToken(token.getToken(), token.getUser()));
+    	else
+    		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(false);
     }
 }

@@ -11,6 +11,7 @@ import com.mssecurity.client.IUserClient;
 import com.mssecurity.domain.Token;
 import com.mssecurity.domain.User;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Base64;
@@ -57,12 +58,21 @@ public class SecurityService {
     }
  
     public Boolean hasTokenExpired(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody()
-                .getExpiration()
-                .before(new Date());
+		boolean isFound = false;
+		
+		try {
+			Jwts.parser()
+            .setSigningKey(SECRET_KEY)
+            .parseClaimsJws(token)
+            .getBody()
+            .getExpiration()
+            .before(new Date());
+		} catch (ExpiredJwtException e) {
+			isFound = true;
+		}
+		
+		return isFound;
+
     }
  
     public Boolean validateToken(String token, User user) {
@@ -72,10 +82,15 @@ public class SecurityService {
     }
  
     public String extractUsername(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+    	
+		try {
+	        return Jwts.parser()
+	                .setSigningKey(SECRET_KEY)
+	                .parseClaimsJws(token)
+	                .getBody()
+	                .getSubject();
+		} catch (ExpiredJwtException e) {
+			return "";
+		}
     }
 }
